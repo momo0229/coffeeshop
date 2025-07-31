@@ -1,4 +1,5 @@
-import React from 'react';
+
+
 import './App.css';
 import Header from './components/Header'; // Headerコンポーネントが別途あると仮定
 
