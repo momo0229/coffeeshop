@@ -1,0 +1,671 @@
+/* src/App.css */
+/* src/App.css または src/index.css の先頭に追加 */
+
+/* 正しいパス */
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+/* src/App.css */
+
+/* --- 全体に対するリセットと基本設定 --- */
+* {
+  box-sizing: border-box; /* 全要素にbox-sizing: border-box;を適用 */
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* 横スクロールバーが出ないようにする */
+}
+
+body {
+  font-family: 'Yu Gothic', 'Meiryo', sans-serif; /* ベースフォントを設定 */
+  color: #333; /* ベースの文字色 */
+  line-height: 1.6; /* 行の高さ（読みやすさのため） */
+  background-color: #fcfcfc; /* 全体の背景色を少しオフホワイトに */
+}
+
+/* リンクのデフォルトスタイルを調整（ホバーは各要素で設定） */
+a {
+  color: inherit; /* 親要素の文字色を継承 */
+  text-decoration: none; /* 下線を消す */
+}
+
+/* 見出しのデフォルトスタイル */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0.8em; /* 見出しの下に少し余白 */
+  font-weight: normal; /* 必要に応じて調整 */
+}
+
+/* 画像のデフォルトスタイル */
+img {
+  max-width: 100%; /* 親要素からはみ出さないように */
+  height: auto; /* 縦横比を維持 */
+  vertical-align: bottom; /* 画像の下にできるわずかな隙間をなくす */
+}
+
+/* --- コンポーネント共通のスタイルや調整 --- */
+.App {
+  /* 特に大きな設定は不要 */
+}
+
+/* --- コンテンツラッパーのスタイル (全てのセクションを中央寄せするため) --- */
+.content-wrapper {
+  max-width: 1000px; /* コンテンツの最大幅を設定 */
+  margin: 0 auto; /* 中央寄せ */
+  /* padding: 0 20px; */ /* 左右の余白が必要な場合、ここに設定 */
+}
+
+
+/* 各セクションの共通スタイル */
+section {
+  padding: 80px 20px; /* 上下左右の余白を統一 */
+  text-align: center;
+}
+
+/* 各セクションの見出しh2の共通スタイル */
+section h2 {
+    font-size: 2.8em; /* セクションのメインH2サイズ */
+    color: #333;
+    margin-bottom: 40px;
+    position: relative;
+    display: inline-block; /* 下線の幅を文字に合わせるため */
+}
+
+section h2::after {
+    content: '';
+    display: block;
+    width: 60%; /* 下線の幅 */
+    height: 3px; /* 下線の太さ */
+    background-color: #a0522d; /* 下線の色（コーヒー色） */
+    margin: 10px auto 0; /* 下線と見出しの間の余白、中央寄せ */
+}
+
+
+/* 特定セクションの背景色など */
+#about,
+#gallery,
+#contact {
+  background-color: #f5f5f5; /* 少しグレーがかった背景色 */
+}
+
+#menu,
+#access {
+  background-color: #ffffff; /* 白い背景色 */
+}
+
+/* --- HeaderコンポーネントのCSS --- */
+.site-header {
+  width: 100%;
+  background-color: #fff;
+  box-sizing: border-box;
+  /* position: fixed; */ /* ヘッダーを固定する場合 */
+  /* top: 0; */
+  /* left: 0; */
+  /* z-index: 1000; */
+}
+
+.header-inner {
+  max-width: 1000px; /* 例えば、コンテンツの最大幅 */
+  margin: 0 auto; /* 中央寄せ */
+  padding: 20px; /* 上下の余白 */
+  display: flex; /* 子要素を横並びにする */
+  justify-content: space-between; /* ロゴとナビを左右に配置 */
+  align-items: center; /* 垂直方向中央寄せ */
+}
+
+.site-logo img {
+  width: 150px; /* ロゴのサイズ */
+  height: auto;
+  display: block;
+}
+
+.main-nav ul {
+  list-style: none; /* リストの点（・）を消す */
+  margin: 0;
+  padding: 0;
+  display: flex; /* リストアイテムを横並びにする */
+}
+
+.main-nav li {
+  margin-left: 30px; /* 各メニュー項目の左に余白 */
+}
+
+.main-nav a {
+  text-decoration: none; /* 下線を消す */
+  color: #333; /* 文字色 */
+  font-size: 14px; /* 文字サイズ */
+  font-weight: bold; /* 少し太字にする場合 */
+  transition: color 0.3s ease; /* ホバー時のアニメーション */
+}
+
+.main-nav a:hover {
+  color: #a0522d; /* ホバー時の色（コーヒー色など） */
+}
+
+/* --- Main VisualセクションのCSS --- */
+.main-visual {
+  position: relative;
+  width: 100%;
+  height: 600px; /* メインビジュアルの高さ。必要に応じて調整 */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff; /* テキストを白にする場合 */
+  text-align: center;
+}
+
+.main-visual-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 動画がセクションに収まるようにトリミングし、アスペクト比を維持 */
+  position: absolute; /* 親要素いっぱいに広げる */
+  top: 0;
+  left: 0;
+  z-index: 1; /* テキストやオーバーレイより後ろに配置 */
+}
+
+.main-visual-overlay {
+  position: absolute; /* 動画の上に重ねる */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* 半透明の黒（RGBAで最後の値が透明度） */
+  z-index: 2; /* 動画より手前、テキストより後ろに配置 */
+}
+
+.main-visual-content {
+  position: relative; /* 動画とオーバーレイの上に重ねる */
+  z-index: 3; /* 最前面に配置 */
+  padding: 20px;
+}
+
+.main-visual-content h1 {
+  font-size: 4em;
+  margin-bottom: 10px;
+}
+
+.main-visual-content p {
+  font-size: 1.5em;
+  line-height: 1.5;
+}
+
+
+/* --- MENUセクションのCSS --- */
+#menu h2 {
+    margin-bottom: 60px; /* セクションH2の下に余裕を持たせる */
+}
+
+/* おすすめメニューエリアのスタイル */
+.recommended-menu {
+    margin-bottom: 80px; /* おすすめエリアの下にスペース */
+    text-align: center;
+}
+
+.recommended-menu h3 {
+    font-size: 2.2em; /* おすすめメニューの見出し */
+    color: #a0522d; /* コーヒー色 */
+    margin-bottom: 40px;
+}
+
+.recommended-items {
+    display: flex;
+    flex-wrap: wrap; /* 小さい画面で折り返す */
+    justify-content: center;
+    gap: 30px; /* アイテム間の隙間 */
+}
+
+.recommended-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    width: calc(33% - 30px); /* 3列表示 */
+    min-width: 280px; /* 最小幅 */
+    overflow: hidden; /* 角丸に合わせて画像も隠す */
+    text-align: center;
+    padding-bottom: 20px; /* 下部に余白 */
+}
+
+.recommended-item-img {
+    width: 100%; /* 親要素（recommended-item）の幅いっぱい */
+    height: 200px; /* 高さ固定 */
+    object-fit: cover; /* はみ出した部分をトリミング */
+    display: block; /* 余分な隙間をなくす */
+    margin-bottom: 15px;
+}
+
+.recommended-item h4 {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.recommended-item p {
+    font-size: 0.95em;
+    color: #666;
+    padding: 0 15px; /* 左右に少しパディング */
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.recommended-item-price {
+    font-size: 1.3em;
+    font-weight: bold;
+    color: #a0522d; /* アクセントカラー */
+}
+
+/* 全メニューリストの見出し */
+#menu > h3 { /* id="menu" の直下にあるh3に適用 */
+    font-size: 2em;
+    color: #333;
+    margin-top: 60px; /* おすすめエリアとの間隔 */
+    margin-bottom: 40px;
+}
+
+/* 全メニューリストのコンテナ */
+.menu-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.menu-category {
+  background-color: #fcfcfc;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  width: calc(33% - 40px);
+  min-width: 300px;
+  text-align: left;
+}
+
+.menu-category h3 {
+  font-size: 1.8em;
+  color: #a0522d;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline; /* テキストのみなのでベースラインでOK */
+  padding: 10px 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.menu-list li:last-child {
+  border-bottom: none;
+}
+
+.menu-item-name {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #555;
+  flex: 1; /* 残りスペースを埋める */
+  margin-right: 15px; /* 価格との間の余白 */
+}
+
+.menu-item-price {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #555;
+  flex-shrink: 0;
+  min-width: 80px; /* 価格の最低幅を確保 */
+  text-align: right;
+}
+
+/* --- GALLERYセクションのCSS ★変更・追加★ --- */
+.slider-container {
+    max-width: 800px; /* スライドショーの最大幅 */
+    margin: 40px auto 0; /* 中央寄せと上部余白 */
+    overflow: hidden; /* スライドショーの端を隠すため */
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* よりはっきりした影 */
+    position: relative; /* ドットや矢印の位置調整のため */
+}
+
+.gallery-slide-item img {
+    width: 100%;
+    height: 450px; /* スライド画像の高さ。必要に応じて調整 */
+    object-fit: cover;
+    display: block; /* 余分な隙間をなくす */
+}
+
+/* slick-carouselのデフォルトスタイルを調整 (必要に応じて) */
+.slick-prev:before, .slick-next:before {
+    font-size: 40px; /* 矢印のサイズ */
+    color: #a0522d; /* 矢印の色 */
+    opacity: 0.8;
+}
+
+.slick-dots li button:before {
+    font-size: 12px; /* ドットのサイズ */
+    color: #a0522d; /* ドットの色 */
+    opacity: 0.6;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #a0522d; /* アクティブなドットの色 */
+    opacity: 1;
+}
+
+.slick-dots {
+    bottom: 20px; /* ドットの位置調整 */
+}
+
+
+/* --- Google MapコンテナのCSS --- */
+.map-container {
+  max-width: 800px; /* マップの最大幅 */
+  margin: 30px auto; /* 中央寄せと上下の余白 */
+  overflow: hidden; /* マップがはみ出さないように */
+  border-radius: 8px; /* 角を丸くする */
+}
+
+.map-container iframe {
+  width: 100%; /* 親要素の幅いっぱいに広げる */
+  height: 400px; /* 高さを調整する */
+  display: block; /* 余分なスペースをなくす */
+}
+
+
+/* --- CONTACTセクションのCSS --- */
+.contact-form {
+    max-width: 600px; /* フォームの最大幅 */
+    margin: 40px auto 0; /* 中央寄せと上部余白 */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    text-align: left; /* フォーム要素を左寄せに */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block; /* ラベルをブロック要素にして一行占有 */
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%; /* 幅を親要素いっぱいに */
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: 'Yu Gothic', 'Meiryo', sans-serif;
+    box-sizing: border-box; /* paddingを含めて幅を計算 */
+}
+
+.form-group textarea {
+    resize: vertical; /* 縦方向のみリサイズ可能にする */
+}
+
+.submit-button {
+    background-color: #a0522d; /* ボタンの背景色 */
+    color: #fff; /* ボタンの文字色 */
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block; /* ボタンを中央寄せするためにブロック要素に */
+    margin: 0 auto; /* 中央寄せ */
+}
+
+.submit-button:hover {
+    background-color: #8c4728; /* ホバー時の色 */
+}
+
+
+/* --- フッターのCSS ★変更・追加★ --- */
+.site-footer {
+  background-color: #333; /* 暗めの背景色 */
+  color: #eee; /* 明るい文字色 */
+  padding: 40px 20px; /* 上下左右の余白 */
+  text-align: center;
+  font-size: 14px;
+}
+
+.footer-content {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-around; /* 要素を均等に配置 */
+  align-items: flex-start; /* 上端揃え */
+  flex-wrap: wrap; /* 小さい画面で折り返す */
+  margin-bottom: 20px;
+}
+
+.footer-contact-info {
+  margin: 10px 20px;
+  text-align: left; /* 店舗情報は左寄せ */
+}
+
+.footer-sns {
+  margin: 10px 20px;
+  text-align: center; /* SNSは中央寄せ */
+}
+
+.footer-content h3 {
+  font-size: 1.2em;
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.footer-contact-info p {
+  margin: 5px 0;
+}
+
+.sns-icons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center; /* SNSアイコンを中央に寄せる */
+}
+
+.sns-icons li {
+  margin: 0 10px;
+}
+
+.sns-icons a {
+  text-decoration: none;
+  color: #eee;
+  transition: color 0.3s ease;
+  font-size: 1.5em; /* アイコンのサイズ */
+}
+
+.sns-icons a:hover {
+  color: #a0522d; /* ホバー時の色 */
+}
+
+.footer-copyright {
+  margin-top: 20px;
+  font-size: 0.9em;
+  border-top: 1px solid #555; /* 上部に細い線 */
+  padding-top: 20px;
+}
+
+/* --- レスポンシブデザイン --- */
+
+/* 768px以下の画面 (タブレット縦向き、スマホ横向き) */
+@media (max-width: 768px) {
+  .header-inner {
+    flex-direction: column;
+    padding: 15px;
+  }
+
+  .site-logo {
+    margin-bottom: 15px;
+  }
+
+  .main-nav ul {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .main-nav li {
+    margin: 0 15px 10px;
+  }
+
+  .main-visual {
+    height: 400px;
+  }
+
+  .main-visual-content h1 {
+    font-size: 2.8em;
+  }
+
+  .main-visual-content p {
+    font-size: 1.2em;
+  }
+
+  section {
+    padding: 60px 15px;
+  }
+
+  .recommended-item,
+  .menu-category {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .recommended-items,
+  .menu-container {
+    gap: 20px;
+  }
+
+  /* GALLERYセクションの調整 */
+  .slider-container {
+      max-width: 95%; /* スライドショーの幅を調整 */
+  }
+  .gallery-slide-item img {
+      height: 350px; /* スライド画像の高さを調整 */
+  }
+
+  .map-container {
+    max-width: 100%;
+  }
+
+  .map-container iframe {
+    height: 300px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-contact-info,
+  .footer-sns {
+    margin: 15px 0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* 480px以下の画面 (スマートフォン縦向き) */
+@media (max-width: 480px) {
+  .main-visual {
+    height: 300px;
+  }
+
+  .main-visual-content h1 {
+    font-size: 2em;
+  }
+
+  .main-visual-content p {
+    font-size: 1em;
+  }
+
+  section {
+    padding: 40px 10px;
+  }
+
+  section h2 {
+    font-size: 2em;
+    margin-bottom: 30px;
+  }
+
+  .recommended-menu h3,
+  #menu > h3 {
+    font-size: 1.8em;
+    margin-bottom: 30px;
+  }
+
+  .recommended-item-img {
+    height: 150px;
+  }
+
+  .recommended-item h4 {
+    font-size: 1.3em;
+  }
+
+  .recommended-item p {
+    font-size: 0.9em;
+  }
+
+  .recommended-item-price {
+    font-size: 1.1em;
+  }
+
+  .menu-category {
+    padding: 20px;
+  }
+
+  .menu-category h3 {
+    font-size: 1.5em;
+  }
+
+  .menu-list li {
+    padding: 8px 0;
+  }
+
+  .menu-item-name,
+  .menu-item-price {
+    font-size: 1em;
+  }
+
+  .menu-item-price {
+    min-width: 60px;
+  }
+
+  .contact-form {
+    padding: 20px;
+  }
+
+  .form-group label,
+  .form-group input,
+  .form-group textarea,
+  .submit-button {
+    font-size: 0.9em;
+  }
+
+  .submit-button {
+    padding: 10px 20px;
+  }
+
+  /* GALLERYセクションの調整 */
+  .gallery-slide-item img {
+      height: 250px; /* スマートフォンでの高さを調整 */
+  }
+}
